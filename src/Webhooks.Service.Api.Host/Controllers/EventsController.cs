@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Webhooks.Service.Models.Dtos;
 using Webhooks.Service.Models.Parameters;
+using Webhooks.Service.Models.Result;
 using Webhooks.Service.Services.Interfaces;
 
 namespace Webhooks.Service.Api.Host.Controllers
@@ -23,12 +24,12 @@ namespace Webhooks.Service.Api.Host.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost,
-         ProducesResponseType(StatusCodes.Status204NoContent)]
+         ProducesResponseType(typeof(EntityResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> AddAsync([FromBody] EventParameters parameters)
         {
-            await _service.AddAsync(parameters);
+            var result = await _service.AddAsync(parameters);
 
-            return NoContent();
+            return Ok(result);
         }
 
         /// <summary>

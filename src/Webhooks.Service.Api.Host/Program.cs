@@ -4,11 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Converters;
 using System.Text.Json.Serialization;
+using Webhooks.RabbitMQ.Client.Extensions;
+using Webhooks.RabbitMQ.Models.Common;
+using Webhooks.RabbitMQ.Models.Configurations;
 using Webhooks.Service.Infrastructure.Extensions;
 using Webhooks.Service.Infrastructure.Middlewares;
 using Webhooks.Service.Infrastructure.Profiles;
 using Webhooks.Service.Infrastructure.Validators;
+using Webhooks.Service.Models.Configurations;
 using Webhooks.Service.Models.Dtos;
+using Webhooks.Service.Services.Consumers;
+using Webhooks.Service.Services.Interfaces.Consumers;
+using Webhooks.Service.Services.Interfaces.Producers;
+using Webhooks.Service.Services.Producers;
 
 const string swaggerTitle = "Webhooks Service Api";
 const string swaggerVersion = "v1";
@@ -23,6 +31,9 @@ const string healthzApiPath = "/api/healthz";
 const string healthzReadyPath = "/healthz/ready";
 const string healthzLivePath = "/healthz/live";
 const string healthzServiceUrlParamName = "HealthCheck:ServiceUrl";
+
+const string rabbitMQSectionName = "RabbitMQ";
+const string featruesSectionName = "Features";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,7 +76,15 @@ builder.Services.AddApplicationInsightsTelemetry();
 // TODO: TEMP
 
 // Configure RabbitMQ
-//builder.Services.ConfigureRabbitMQClient(builder.Configuration);
+var rabbitMQConfiguration = builder.Configuration.GetSection(rabbitMQSectionName).Get<RabbitMQConfiguration>();
+builder.Services.ConfigureRabbitMQClient(rabbitMQConfiguration);
+builder.Services.AddSingleton<IInvoiceConsumer, InvoiceConsumer>();
+builder.Services.AddSingleton<IWebhookConsumer, WebhookConsumer>();
+builder.Services.AddSingleton<IWebhookProducer, WebhookProducer>();
+
+// Configure Features
+var featuresConfiguration = builder.Configuration.GetSection(featruesSectionName).Get<FeaturesConfiguration>();
+builder.Services.Configure<FeaturesConfiguration>(configure => configure = featuresConfiguration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -139,6 +158,13 @@ app.Map(healthzApiPath, configuration => configuration.Use(async (context, next)
     await context.Response.WriteAsync(HealthStatus.Healthy.ToString());
     await next(context);
 }));
+
+var serviceProvider = builder.Services?.BuildServiceProvider();
+if (serviceProvider != null)
+{
+    app.Lifetime.ConfigureRabbitMQListener(QueueNames.InvoicesQueue, serviceProvider.GetService<IInvoiceConsumer>()!);
+    app.Lifetime.ConfigureRabbitMQListener(QueueNames.WebhooksQueue, serviceProvider.GetService<IWebhookConsumer>()!);
+}
 
 app.UseSwagger();
 

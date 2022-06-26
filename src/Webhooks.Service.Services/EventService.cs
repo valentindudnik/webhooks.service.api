@@ -5,6 +5,7 @@ using Webhooks.Service.DataAccess.Models.Entities;
 using Webhooks.Service.Models.Dtos;
 using Webhooks.Service.Models.Exceptions;
 using Webhooks.Service.Models.Parameters;
+using Webhooks.Service.Models.Result;
 using Webhooks.Service.Services.Interfaces;
 
 namespace Webhooks.Service.Services
@@ -24,7 +25,7 @@ namespace Webhooks.Service.Services
             _logger = logger;
         }
 
-        public async Task AddAsync(EventParameters parameters)
+        public async Task<EntityResult> AddAsync(EventParameters parameters)
         {
             _logger.LogInformation($"{nameof(AddAsync)} with parameters.");
 
@@ -35,8 +36,12 @@ namespace Webhooks.Service.Services
             await _repository.AddAsync(entity);
 
             await _repository.SaveChangesAsync();
+            
+            var result = _mapper.Map<EntityResult>(entity);
 
             _logger.LogInformation($"{nameof(Event)} was added successfully.");
+
+            return result;
         }
 
         public async Task UpdateAsync(Guid eventId, EventParameters parameters)

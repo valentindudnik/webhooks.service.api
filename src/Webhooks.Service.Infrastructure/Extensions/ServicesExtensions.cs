@@ -11,6 +11,8 @@ namespace Webhooks.Service.Infrastructure.Extensions
             services.AddScoped<ISubscriptionService, SubscriptionService>();
             services.AddScoped<IWebhookService, WebhookService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IMessageService, MessageService>();
         }
     }
 }

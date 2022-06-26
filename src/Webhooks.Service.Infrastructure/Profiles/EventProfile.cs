@@ -2,6 +2,7 @@
 using Webhooks.Service.DataAccess.Models.Entities;
 using Webhooks.Service.Models.Dtos;
 using Webhooks.Service.Models.Parameters;
+using Webhooks.Service.Models.Result;
 
 namespace Webhooks.Service.Infrastructure.Profiles
 {
@@ -17,6 +18,8 @@ namespace Webhooks.Service.Infrastructure.Profiles
                 .ReverseMap();
 
             CreateMap<EventDto, Event>().ReverseMap();
+
+            CreateMap<EventDto, EntityResult>().ReverseMap();
         }
     }
 }
