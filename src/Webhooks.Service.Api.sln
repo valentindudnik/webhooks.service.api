@@ -5,9 +5,9 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BBB0DC7D-E284-4BD2-9FEC-8CC211A8B60E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Models", "Webhooks.Service.Models\Webhooks.Service.Models.csproj", "{EE62EB2A-1FB0-4ECB-9E50-CB90CE762E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Models", "Webhooks.Service.Models\Webhooks.Service.Models.csproj", "{EE62EB2A-1FB0-4ECB-9E50-CB90CE762E55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Services", "Webhooks.Service.Services\Webhooks.Service.Services.csproj", "{4223C1D0-1E49-4510-8C25-A7F8529A7254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Services", "Webhooks.Service.Services\Webhooks.Service.Services.csproj", "{4223C1D0-1E49-4510-8C25-A7F8529A7254}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDDTests", "BDDTests", "{33ABF106-0C23-4F00-9AE8-850DE7EF83D0}"
 EndProject
@@ -15,23 +15,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "Integra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{D6F8FA6B-A0E2-42E5-95EB-CC2B31EAFAE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.DataAccess", "Webhooks.Service.DataAccess\Webhooks.Service.DataAccess.csproj", "{E567E462-B90C-469B-9059-843CF7A3833E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.DataAccess", "Webhooks.Service.DataAccess\Webhooks.Service.DataAccess.csproj", "{E567E462-B90C-469B-9059-843CF7A3833E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.DataAccess.Models", "Webhooks.Service.DataAccess.Models\Webhooks.Service.DataAccess.Models.csproj", "{D326E79F-E264-431F-81D4-320569F805E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.DataAccess.Models", "Webhooks.Service.DataAccess.Models\Webhooks.Service.DataAccess.Models.csproj", "{D326E79F-E264-431F-81D4-320569F805E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Infrastructure", "Webhooks.Service.Infrastructure\Webhooks.Service.Infrastructure.csproj", "{9510E37F-0F6C-4106-A1C4-EE61268DE5E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Infrastructure", "Webhooks.Service.Infrastructure\Webhooks.Service.Infrastructure.csproj", "{9510E37F-0F6C-4106-A1C4-EE61268DE5E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Api.BDD.Tests", "Webhooks.Service.Api.BDD.Tests\Webhooks.Service.Api.BDD.Tests.csproj", "{BF92A6F3-7447-4E14-94E8-DC852A455168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Api.BDD.Tests", "Webhooks.Service.Api.BDD.Tests\Webhooks.Service.Api.BDD.Tests.csproj", "{BF92A6F3-7447-4E14-94E8-DC852A455168}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Api.IntegrationTests", "Webhooks.Service.Api.IntegrationTests\Webhooks.Service.Api.IntegrationTests.csproj", "{835C550C-4932-4EC2-BE6E-BB5CEE86ED4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Api.IntegrationTests", "Webhooks.Service.Api.IntegrationTests\Webhooks.Service.Api.IntegrationTests.csproj", "{835C550C-4932-4EC2-BE6E-BB5CEE86ED4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Api.UnitTests", "Webhooks.Service.Api.UnitTests\Webhooks.Service.Api.UnitTests.csproj", "{3CE8A026-BF1A-402F-8793-B73B329F695C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Api.UnitTests", "Webhooks.Service.Api.UnitTests\Webhooks.Service.Api.UnitTests.csproj", "{3CE8A026-BF1A-402F-8793-B73B329F695C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.Services.UnitTests", "Webhooks.Service.Services.UnitTests\Webhooks.Service.Services.UnitTests.csproj", "{8D6750AF-8D6A-4BD6-9FCE-8557D613D48A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Services.UnitTests", "Webhooks.Service.Services.UnitTests\Webhooks.Service.Services.UnitTests.csproj", "{8D6750AF-8D6A-4BD6-9FCE-8557D613D48A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhooks.Service.DataAccess.UnitTests", "Webhooks.Service.DataAccess.UnitTests\Webhooks.Service.DataAccess.UnitTests.csproj", "{6D2F8BEE-7F07-46DC-9252-5F36DA80625F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.DataAccess.UnitTests", "Webhooks.Service.DataAccess.UnitTests\Webhooks.Service.DataAccess.UnitTests.csproj", "{6D2F8BEE-7F07-46DC-9252-5F36DA80625F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Api.Host", "Webhooks.Service.Api.Host\Webhooks.Service.Api.Host.csproj", "{8CDDABE4-ED61-4343-92D0-6FCF9A4B67F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhooks.Service.Enums", "Webhooks.Service.Enums\Webhooks.Service.Enums.csproj", "{EC36F1BD-1DE8-48FF-A6F4-2518A1919514}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{8CDDABE4-ED61-4343-92D0-6FCF9A4B67F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CDDABE4-ED61-4343-92D0-6FCF9A4B67F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CDDABE4-ED61-4343-92D0-6FCF9A4B67F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC36F1BD-1DE8-48FF-A6F4-2518A1919514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC36F1BD-1DE8-48FF-A6F4-2518A1919514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC36F1BD-1DE8-48FF-A6F4-2518A1919514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC36F1BD-1DE8-48FF-A6F4-2518A1919514}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webhooks.Service.DataAccess\Webhooks.Service.DataAccess.csproj" />
+    <ProjectReference Include="..\Webhooks.Service.Models\Webhooks.Service.Models.csproj" />
+  </ItemGroup>
+
 </Project>
