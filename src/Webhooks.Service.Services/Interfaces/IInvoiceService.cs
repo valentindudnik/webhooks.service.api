@@ -1,4 +1,5 @@
-﻿using Webhooks.Service.Models.Events;
+﻿using Webhooks.Service.Models.Configurations;
+using Webhooks.Service.Models.Events;
 
 namespace Webhooks.Service.Services.Interfaces
 {

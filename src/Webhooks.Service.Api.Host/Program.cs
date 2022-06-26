@@ -75,6 +75,10 @@ builder.Services.AddApplicationInsightsTelemetry();
 // Configure Authentification
 // TODO: TEMP
 
+// Configure Features
+var featuresConfiguration = builder.Configuration.GetSection(featruesSectionName).Get<FeaturesConfiguration>();
+builder.Services.Configure<FeaturesConfiguration>(configure => configure.WebhookQueueFeatureEnabled = featuresConfiguration.WebhookQueueFeatureEnabled);
+
 // Configure RabbitMQ
 var rabbitMQConfiguration = builder.Configuration.GetSection(rabbitMQSectionName).Get<RabbitMQConfiguration>();
 builder.Services.ConfigureRabbitMQClient(rabbitMQConfiguration);
@@ -82,10 +86,7 @@ builder.Services.AddSingleton<IInvoiceConsumer, InvoiceConsumer>();
 builder.Services.AddSingleton<IWebhookConsumer, WebhookConsumer>();
 builder.Services.AddSingleton<IWebhookProducer, WebhookProducer>();
 
-// Configure Features
-var featuresConfiguration = builder.Configuration.GetSection(featruesSectionName).Get<FeaturesConfiguration>();
-builder.Services.Configure<FeaturesConfiguration>(configure => configure = featuresConfiguration);
-
+// Configure Controllers
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 

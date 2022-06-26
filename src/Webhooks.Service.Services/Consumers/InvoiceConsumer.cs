@@ -15,7 +15,7 @@ namespace Webhooks.Service.Services.Consumers
     public class InvoiceConsumer : RabbitMQConsumer, IInvoiceConsumer
     {
         private readonly IServiceProvider _serviceProvider;
-        
+
         public InvoiceConsumer(IRabbitMQClient client, IServiceProvider serviceProvider) : base(client)
         {
             _serviceProvider = serviceProvider;

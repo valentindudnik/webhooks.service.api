@@ -20,6 +20,8 @@ namespace Webhooks.Service.Infrastructure.Profiles
             CreateMap<SubscriptionDto, Subscription>().ReverseMap();
 
             CreateMap<SubscriptionDto, EntityResult>().ReverseMap();
+
+            CreateMap<Subscription, EntityResult>().ReverseMap();
         }
     }
 }

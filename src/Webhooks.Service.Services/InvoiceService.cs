@@ -21,7 +21,6 @@ namespace Webhooks.Service.Services
         private readonly IHttpClientFactory _httpClientFactory;
 
         private readonly FeaturesConfiguration _featuresConfiguration;
-
         private readonly ILogger<InvoiceService> _logger;
 
         public InvoiceService(IGenericRepository<Event> eventsRepository, 
@@ -42,7 +41,6 @@ namespace Webhooks.Service.Services
             _httpClientFactory = httpClientFactory;
 
             _featuresConfiguration = featuresConfigurationOptions.Value;
-
             _logger = logger;
         }
 
@@ -113,31 +111,61 @@ namespace Webhooks.Service.Services
 
                 if (!_featuresConfiguration.WebhookQueueFeatureEnabled)
                 {
-                    await Task.WhenAll(tasks.ToArray());
+                    try
+                    {
+                        await Task.WhenAll(tasks.ToArray());
+                    }
+                    catch (Exception exc)
+                    {
+                        _logger.LogError(exc, exc.Message);
+                    }
 
                     var messages = new List<Message>();
 
-                    var responses = tasks.Select(task => task.Result);
-
-                    foreach (var response in responses)
+                    foreach (var task in tasks)
                     {
-                        var requestContent = await response?.RequestMessage?.Content?.ReadAsStringAsync()!;
-                        var responseContent = await response.Content.ReadAsStringAsync();
+                        if (!task.IsFaulted)
+                        {
+                            var response = await task;
+                            var requestContent = await response?.RequestMessage?.Content?.ReadAsStringAsync()!;
+                            var responseContent = await response.Content.ReadAsStringAsync();
 
-                        var message = new Message {
-                            Id = Guid.NewGuid(),
-                            Url = response.RequestMessage?.RequestUri?.ToString(),
-                            StatusCode = (int)response.StatusCode,
-                            RequestContent = requestContent,
-                            ResponseContent = responseContent,
-                            MessageStatus = response.IsSuccessStatusCode ? Enums.MessageStatus.Successed : Enums.MessageStatus.Failure,
-                            Created = DateTime.UtcNow,
-                            Updated = DateTime.UtcNow,
-                            IsActive = true
-                        };
+                            var message = new Message
+                            {
+                                Id = Guid.NewGuid(),
+                                Url = response.RequestMessage?.RequestUri?.ToString(),
+                                StatusCode = (int)response.StatusCode,
+                                RequestContent = requestContent,
+                                ResponseContent = responseContent,
+                                MessageStatus = response.IsSuccessStatusCode ? Enums.MessageStatus.Successed : Enums.MessageStatus.Failure,
+                                Created = DateTime.UtcNow,
+                                Updated = DateTime.UtcNow,
+                                IsActive = true
+                            };
+                            messages.Add(message);
+                        }
+                        else if (task.IsFaulted || task.IsCanceled)
+                        {
+                            var message = new Message
+                            {
+                                Id = Guid.NewGuid(),
+                                Url = task.Exception?.Message,
+                                StatusCode = (int)System.Net.HttpStatusCode.BadRequest,
+                                RequestContent = task.Exception?.Message,
+                                ResponseContent = task.Exception?.Message,
+                                MessageStatus = Enums.MessageStatus.Failure,
+                                Created = DateTime.UtcNow,
+                                Updated = DateTime.UtcNow,
+                                IsActive = true
+                            };
+                            messages.Add(message);
+                        }
                     }
 
-                    await _messageService.AddAsync(messages);
+                    if (messages.Count > 0)
+                    {
+                        await _messageService.AddAsync(messages);
+                    }
                 }
             }
 

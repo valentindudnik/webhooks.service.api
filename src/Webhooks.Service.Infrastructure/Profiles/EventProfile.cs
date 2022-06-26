@@ -20,6 +20,8 @@ namespace Webhooks.Service.Infrastructure.Profiles
             CreateMap<EventDto, Event>().ReverseMap();
 
             CreateMap<EventDto, EntityResult>().ReverseMap();
+
+            CreateMap<Event, EntityResult>().ReverseMap();
         }
     }
 }
