@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhooksserviceapihostapi
+  labels:
+    app: webhooksserviceapihost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: webhooksserviceapihostapi
+  template:
+    metadata:
+      labels:
+        app: webhooksserviceapihost
+        service: webhooksserviceapihostapi
+    spec:
+      containers:
+        - name: webhooksserviceapihostapi
+          image: webhooksserviceapihost.azurecr.io/webhooksserviceapihost:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+      imagePullSecrets:
+        - name: acr-webhook-service-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: 
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: mc_resources-group_default_westeurope
+  name: webhooksserviceapihostapi
+  labels:
+    app: webhooksserviceapihost
+    service: webhooksserviceapihostapi
+spec:
+  loadBalancerIP: 20.31.10.191
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    service: webhooksserviceapihostapi
