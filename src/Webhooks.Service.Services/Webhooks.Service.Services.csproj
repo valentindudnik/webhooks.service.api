@@ -10,8 +10,8 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
-    <PackageReference Include="Webhooks.RabbitMQ.Client" Version="1.0.0" />
-    <PackageReference Include="Webhooks.RabbitMQ.Models" Version="1.0.0" />
+    <PackageReference Include="Webhooks.RabbitMQ.Client" Version="1.0.2" />
+    <PackageReference Include="Webhooks.RabbitMQ.Models" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
